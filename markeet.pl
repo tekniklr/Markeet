@@ -33,14 +33,13 @@ $attempts++;
 # get a new tweetov compilation!
 $tweet = `$python_path twittov.py -r 12 -l 3 $twitter_user`;
 
-# Tidy it.
+#####################################################################
+# quality control
 $tweet = decode_entities($tweet);
 $tweet =~ s/Dug: //; # the prefix to my blog tweets
 $tweet =~ s/"//g; # quotes probably won't be matched- kill 'em all
 $tweet =~ s/,$//; # kill trailing commas
 $tweet =~ s/@[_A-Za-z0-9]+/[redacted]/g; # kill nonsense mentions
-
-# then make sure it meets various criteria
 
 # can't be a RT
 ($tweet =~ /RT /) and goto GENERATE;
@@ -50,6 +49,7 @@ $tweet =~ s/@[_A-Za-z0-9]+/[redacted]/g; # kill nonsense mentions
 
 # can't be longer than 140 characters
 (length($tweet) > 140) and goto GENERATE;
+#####################################################################
 
 # if we've gotten to this point, we have a suitable tweet! Yay!
 
