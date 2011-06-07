@@ -1,7 +1,7 @@
 Works in conjunction with Twittov (http://www.yaymukund.com/twittov/) to 
 tweet its mashings, possibly via cron.
 
-See it in action: @teknikov
+See it in action: @teknikov (http://twitter.com/teknikov)
 
 You will need python, twittov, HTML::Entities and Net::Twitter::Lite.
 
