@@ -43,12 +43,7 @@ $tweet =~ s/,$//; # kill trailing commas
 $tweet =~ s/@[_A-Za-z0-9]+/[redacted]/g; # kill nonsense mentions
 $tweet =~ s/#([\w]+)/$1/g; # felt bad about polluting hashtags
 $tweet =~ s/http:\/\/[-._a-zA-Z0-9\/]//g; # lose all links
-
-# can't be a RT
-($tweet =~ /RT /) and goto GENERATE;
-
-# no links, please
-($tweet =~ /http:\/\//) and goto GENERATE;
+$tweet =~ s/RT //g; # lose retweets (they are a lie, anyway)
 
 # can't be longer than 140 characters
 (length($tweet) > 140) and goto GENERATE;
