@@ -1,12 +1,13 @@
 #!/usr/bin/perl -w
 
-# Works in conjunction with Twittov (http://www.yaymukund.com/twittov/) to tweet its mashings, possibly via cron.
+# Works in conjunction with Twittov (http://www.yaymukund.com/twittov/) to tweet
+# its mashings, possibly via cron.
 
 use strict;
 use HTML::Entities;
 use Net::Twitter::Lite;
 
-#####################################################################
+################################################################################
 # configuration
 my $twitter_user = 'username';
 my $twittov_path = '/path/to/twittov/bin/'; # twittov parent directory
@@ -15,7 +16,7 @@ my $consumer_key        = '0000000000000000000000';
 my $consumer_secret     = '000000000000000000000000000000000000000000';
 my $access_token        = '00000000000000000000000000000000000000000000000000';
 my $access_token_secret = '0000000000000000000000000000000000000000000';
-#####################################################################
+################################################################################
 
 my $tweet;
 my $attempts = 0;
@@ -33,23 +34,25 @@ $attempts++;
 # get a new tweetov compilation!
 $tweet = `$python_path twittov.py -r 12 -l 3 $twitter_user`;
 
-#####################################################################
+################################################################################
 # quality control
 $tweet = decode_entities($tweet);
 $tweet =~ s/Dug: //; # the prefix to my blog tweets
 $tweet =~ s/"//g; # quotes probably won't be matched- kill 'em all
 $tweet =~ s/,$//; # kill trailing commas
 $tweet =~ s/@[_A-Za-z0-9]+/[redacted]/g; # kill nonsense mentions
+$tweet =~ s/#([\w]+)/$1/g; # felt bad about polluting hashtags
+$tweet =~ s/http:\/\/[-._a-zA-Z0-9\/]//g; # lose all links
 
 # can't be a RT
 ($tweet =~ /RT /) and goto GENERATE;
 
-# no foursuqare links, please
-($tweet =~ /4sq.com/) and goto GENERATE;
+# no links, please
+($tweet =~ /http:\/\//) and goto GENERATE;
 
 # can't be longer than 140 characters
 (length($tweet) > 140) and goto GENERATE;
-#####################################################################
+################################################################################
 
 # if we've gotten to this point, we have a suitable tweet! Yay!
 
