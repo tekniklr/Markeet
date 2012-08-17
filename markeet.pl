@@ -56,7 +56,8 @@ my $twitter = Net::Twitter::Lite->new(
 	consumer_key        => $consumer_key,
 	consumer_secret     => $consumer_secret,
 	access_token        => $access_token,
-	access_token_secret => $access_token_secret
+	access_token_secret => $access_token_secret,
+  legacy_lists_api    => 0
 );
 $twitter->update("$tweet");
 
