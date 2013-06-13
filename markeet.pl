@@ -5,7 +5,7 @@
 
 use strict;
 use HTML::Entities;
-use Net::Twitter::Lite;
+use Net::Twitter::Lite::WithAPIv1_1;
 
 ################################################################################
 # configuration
@@ -52,7 +52,7 @@ $tweet =~ s/RT //g; # lose retweets (they are a lie, anyway)
 # if we've gotten to this point, we have a suitable tweet! Yay!
 
 # Tweet it.
-my $twitter = Net::Twitter::Lite->new(
+my $twitter = Net::Twitter::Lite::WithAPIv1_1->new(
 	consumer_key        => $consumer_key,
 	consumer_secret     => $consumer_secret,
 	access_token        => $access_token,
