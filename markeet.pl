@@ -36,7 +36,6 @@ $tweet = `$python_path twittov.py -r 12 -l 3 $twitter_user`;
 
 ################################################################################
 # quality control
-$tweet = decode_entities($tweet);
 $tweet =~ s/Dug: //; # the prefix to my blog tweets
 $tweet =~ s/"//g; # quotes probably won't be matched- kill 'em all
 $tweet =~ s/,$//; # kill trailing commas
@@ -59,6 +58,6 @@ my $twitter = Net::Twitter::Lite::WithAPIv1_1->new(
 	access_token_secret => $access_token_secret,
   legacy_lists_api    => 0
 );
-$twitter->update("$tweet");
+$twitter->update(decode_entities($tweet));
 
 print "Twote:\n$tweet\n";
