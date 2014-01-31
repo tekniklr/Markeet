@@ -56,7 +56,12 @@ my $twitter = Net::Twitter::Lite::WithAPIv1_1->new(
 	consumer_secret     => $consumer_secret,
 	access_token        => $access_token,
 	access_token_secret => $access_token_secret,
-  legacy_lists_api    => 0
+  legacy_lists_api    => 0,
+  apiurl              => "https://api.twitter.com/1.1",
+  ssl                 => 1,
+  useragent_args      => { 
+    ssl_opts => { SSL_ca_path => "/System/Library/OpenSSL/certs" } 
+  }
 );
 $twitter->update(decode_entities($tweet));
 
