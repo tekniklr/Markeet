@@ -7,7 +7,7 @@ use strict;
 use HTML::Entities;
 use Net::Twitter::Lite::WithAPIv1_1;
 
-################################################################################
+###############################################################################
 # configuration
 my $twitter_user = 'username';
 my $twittov_path = '/path/to/twittov/bin/'; # twittov parent directory
@@ -16,7 +16,7 @@ my $consumer_key        = '0000000000000000000000';
 my $consumer_secret     = '000000000000000000000000000000000000000000';
 my $access_token        = '00000000000000000000000000000000000000000000000000';
 my $access_token_secret = '0000000000000000000000000000000000000000000';
-################################################################################
+###############################################################################
 
 my $tweet;
 my $attempts = 0;
@@ -34,7 +34,7 @@ $attempts++;
 # get a new tweetov compilation!
 $tweet = `$python_path twittov.py -r 12 -l 3 $twitter_user`;
 
-################################################################################
+###############################################################################
 # quality control
 $tweet =~ s/Dug: //; # the prefix to my blog tweets
 $tweet =~ s/"//g; # quotes probably won't be matched- kill 'em all
@@ -46,7 +46,7 @@ $tweet =~ s/RT //g; # lose retweets (they are a lie, anyway)
 
 # can't be longer than 140 characters
 (length($tweet) > 140) and goto GENERATE;
-################################################################################
+###############################################################################
 
 # if we've gotten to this point, we have a suitable tweet! Yay!
 
