@@ -52,10 +52,10 @@ $tweet =~ s/RT //g; # lose retweets (they are a lie, anyway)
 
 # Tweet it.
 my $twitter = Net::Twitter::Lite::WithAPIv1_1->new(
-	consumer_key        => $consumer_key,
-	consumer_secret     => $consumer_secret,
-	access_token        => $access_token,
-	access_token_secret => $access_token_secret,
+  consumer_key        => $consumer_key,
+  consumer_secret     => $consumer_secret,
+  access_token        => $access_token,
+  access_token_secret => $access_token_secret,
   legacy_lists_api    => 0,
   apiurl              => "https://api.twitter.com/1.1",
   ssl                 => 1,
